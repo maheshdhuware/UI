@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script>
+        function bodyload() {
+            var data = [];
+            var http = new XMLHttpRequest();
+            http.open("get", "ipl-points.json", true);
+            http.send()
+            http.onreadystatechange = function () {
+                if (http.readyState === 4) {
+                    data = JSON.parse(http.response)
+                    data.map(function (item) {
+
+                        var tr = document.createElement("tr");
+                        
+                        
+                        var tdTeam = document.createElement("td");
+                        var tdMatches = document.createElement("td");
+                        var tdWon = document.createElement("td");
+                        var tdLost = document.createElement("td");
+                        var tdPoints = document.createElement('td');
+                        var tdNrr = document.createElement("td");
+
+                        tdTeam.innerHTML = `<img src=${item.logo} width="30"> ${item.title}`;
+                        tdMatches.innerHTML = item.matches;
+                        tdWon.innerHTML = item.won;
+                        tdLost.innerHTML = item.lost;
+                        tdPoints.innerHTML = item.pts;
+                        tdNrr.innerHTML = item.nrr;
+
+                        tr.appendChild(tdTeam);
+                        tr.appendChild(tdMatches);
+                        tr.appendChild(tdWon);
+                        tr.appendChild(tdLost);
+                        tr.appendChild(tdPoints);
+                        tr.appendChild(tdNrr);
+
+
+                        document.querySelector('tbody').appendChild(tr)
+                    })
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="container-fluid " onload="bodyload()">
+    <header class="bg-primary p-3 text-white">
+        <span class="h3">Indian Premier League, 2024</span>
+        <div>22 March - 26 May</div>
+    </header>
+    <section>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>TEAM</th>
+                    <th>TMATCH</th>
+                    <th>WON</th>
+                    <th>LOST</th>
+                    <th>PTS</th>
+                    <th>NRR</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </section>
+</body>
+
+</html>
